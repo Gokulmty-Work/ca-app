@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="New Inquiry" blockClass="pc-component">
+        <div class="container mt-5">
+          
+            <!-- Thread Form -->
+            <form [formGroup]="threadForm" (ngSubmit)="submitThread()">
+              
+              <!-- Title -->
+              <div class="mb-3">
+                <label for="threadTitle" class="form-label">Title</label>
+                <input type="text" id="threadTitle" class="form-control" formControlName="title" placeholder="Enter Inquiry title" required>
+                <div *ngIf="threadForm.controls['title'].invalid && threadForm.controls['title'].touched" class="text-danger">
+                  Title is required and must be at least 5 characters long.
+                </div>
+              </div>
+          
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="threadDescription" class="form-label">Description</label>
+                <textarea id="threadDescription" class="form-control" formControlName="description" rows="6" placeholder="Write the description of your Inquiry here..." required></textarea>
+                <div *ngIf="threadForm.controls['description'].invalid && threadForm.controls['description'].touched" class="text-danger">
+                  Description is required and must be at least 10 characters long.
+                </div>
+              </div>
+          
+              <!-- Attach Files -->
+              <div class="mb-3">
+                <label for="fileUpload" class="form-label">Attach files (Optional)</label>
+                <input type="file" id="fileUpload" class="form-control" (change)="onFileChange($event)" multiple>
+              </div>
+          
+              <!-- Submit Button -->
+              <button type="submit" class="btn submit-btn" [disabled]="threadForm.invalid" (click)="proceedToCheckout()">Create Inquiry</button>
+            </form>
+          </div>
+      </app-card>
+    </div>
+  </div>
+  

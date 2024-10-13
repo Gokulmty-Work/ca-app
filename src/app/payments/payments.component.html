@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="Select Payment - ₹100" blockClass="pc-component">
+<!-- payments.component.html -->
+<!-- payments.component.html -->
+<div class="container mt-5">
+  
+    <!-- Payment Method Selection -->
+    <div class="mb-4">
+        <h5>Select Payment Method</h5>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="card" name="paymentMethod" value="card"
+                 [checked]="paymentMethod === 'card'" (change)="onPaymentMethodChange('card')">
+          <label class="form-check-label" for="card">Debit/Credit Card</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="upi" name="paymentMethod" value="upi"
+                 [checked]="paymentMethod === 'upi'" (change)="onPaymentMethodChange('upi')">
+          <label class="form-check-label" for="upi">UPI</label>
+        </div>
+      </div>
+    
+      <!-- Payment Form -->
+      <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+        <!-- Card Payment Section -->
+        <div *ngIf="paymentMethod === 'card'">
+          <div class="mb-3">
+            <label for="cardNumber" class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" formControlName="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" (input)="formatCardNumber($event)" style="width: 50%;" required>
+            <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" class="text-danger">
+              Card number must be 16 digits in format XXXX-XXXX-XXXX-XXXX.
+            </div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="nameOnCard" class="form-label">Name on Card</label>
+            <input type="text" class="form-control" id="nameOnCard" formControlName="nameOnCard" placeholder="Enter name as on the card" style="width: 50%;">
+            <div *ngIf="paymentForm.get('nameOnCard')?.invalid && paymentForm.get('nameOnCard')?.touched" class="text-danger">
+              Name on card is required.
+            </div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cvv" formControlName="cvv" placeholder="Enter 3-digit CVV" maxlength="3" style="width: 50%;">
+            <div *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched" class="text-danger">
+              CVV must be 3 digits.
+            </div>
+          </div>
+        </div>
+    
+        <!-- UPI Payment Section -->
+        <div *ngIf="paymentMethod === 'upi'">
+          <div class="mb-3">
+            <label for="upiId" class="form-label">UPI ID</label>
+            <input type="text" class="form-control" id="upiId" formControlName="upiId" placeholder="Enter your UPI ID" style="width: 50%;">
+            <div *ngIf="paymentForm.get('upiId')?.invalid && paymentForm.get('upiId')?.touched" class="text-danger">
+              Enter a valid UPI ID (e.g., usernamebank).
+            </div>
+          </div>
+        </div>
+    
+        <!-- Pay Now Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="!paymentForm.valid">
+          Pay Now
+        </button>
+      </form>
+    </div>
+  
+</app-card>
+</div>
+</div>

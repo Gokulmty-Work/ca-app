@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card blockClass="pc-component">
+<!-- payment-result.component.html -->
+<div class="container mt-5 text-center">
+    <h2 class="mb-4" *ngIf="paymentStatus === 'success'">Transaction Successful</h2>
+    <h2 class="mb-4" *ngIf="paymentStatus === 'failure'">Transaction Failed</h2>
+  
+    <div *ngIf="paymentStatus === 'success'">
+      <i class="fas fa-check-circle text-success" style="font-size: 50px;"></i>
+    </div>
+  
+    <div *ngIf="paymentStatus === 'failure'">
+      <i class="fas fa-exclamation-circle text-danger" style="font-size: 50px;"></i>
+    </div>
+  
+    <p class="mt-3" *ngIf="paymentStatus === 'success'">
+      Your payment was processed successfully.
+    </p>
+    
+    <p class="mt-3" *ngIf="paymentStatus === 'failure'">
+      Unfortunately, your payment could not be processed. Please try again.
+    </p>
+  
+    <div class="mt-4">
+      <p *ngIf="paymentStatus === 'success'">
+        Redirecting to the <a routerLink="/home">home page</a> or will redirect in <span id="redirectTimer">{{ countdown }}</span> seconds...
+      </p>
+      <p *ngIf="paymentStatus === 'failure'">
+        Status: <strong>Failed</strong>. Redirecting to checkout in <span id="redirectTimer">{{ countdown }}</span> seconds...
+      </p>
+    </div>
+  </div>
+  </app-card>
+  </div>
+  </div>

@@ -1,0 +1,22 @@
+/* payments.component.css */
+button {
+    background-color: #1890ff;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #0e76d0; /* Darker shade on hover */
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .thread-link {
+    color: #1890ff;
+    text-decoration: none;
+  }
+  
+  .thread-link:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,48 @@
+.thread-title {
+    color: #1890ff;
+    text-decoration: none;
+  }
+  
+  .thread-title:hover {
+    text-decoration: underline;
+  }
+  
+  .thread-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .read-more {
+    color: #1890ff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+
+  /* Status Colors */
+  .status-open {
+    color: green;
+  }
+
+  .status-closed {
+    color: red;
+  }
+
+  .status {
+    font-weight: bold;
+  }
+  
+  .new-thread-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+  }
+  
+  .new-thread-btn:hover {
+    background-color: #0e76d0; /* Darker shade on hover */
+  }

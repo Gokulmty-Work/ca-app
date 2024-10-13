@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Inquiry History" blockClass="pc-component">
+      <div class="container mt-3">
+        <!-- New Thread Button -->
+        <div class="d-flex justify-content-end align-items-center mb-4">
+          <button class="btn new-thread-btn" [routerLink]="['/home/new-thread']">
+            <i class="f-16" antIcon type="plus" theme="outline"></i> New Inquiry
+          </button>
+        </div>
+
+        <!-- Thread Item 1 -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="status status-open">OPEN -- </span>
+              <a [routerLink]="['/view-thread']" class="thread-title">Thread Title 1</a>
+            </h5>
+            <p class="card-text thread-description">
+              This is a short description of thread 1. It contains some brief information about the content of the thread.
+            </p>
+            <small class="text-muted">Created on: October 12, 2024 at 12:30 PM</small><br>
+            <small class="text-muted">Last reply on: October 12, 2024 at 1:00 PM</small>
+          </div>
+        </div>
+
+        <!-- Thread Item 2 (with Read More) -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="status status-closed">CLOSED -- </span>
+              <a [routerLink]="['/view-thread']" class="thread-title">Thread Title 2</a>
+            </h5>
+            <p class="card-text thread-description">
+              This is a short description of thread 2. The description is limited to two lines of text to keep it concise.
+              <span *ngIf="showFullDescription" id="full-description">
+                Here is some additional content that will only be shown when the user clicks "Read more...". It explains more details about the thread's discussion and context.
+              </span>
+              <a *ngIf="!showFullDescription" (click)="toggleDescription()" id="read-more" class="read-more">Read more...</a>
+            </p>
+            <small class="text-muted">Created on: October 11, 2024 at 5:00 PM</small><br>
+            <small class="text-muted">Last reply on: October 11, 2024 at 6:15 PM</small>
+          </div>
+        </div>
+
+        <!-- Thread Item 3 -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="status status-open">OPEN -- </span>
+              <a [routerLink]="['/view-thread']" class="thread-title">Thread Title 3</a>
+            </h5>
+            <p class="card-text thread-description">
+              Here is another thread description. This layout ensures that the description does not overflow and looks tidy.
+            </p>
+            <small class="text-muted">Created on: October 10, 2024 at 9:45 AM</small><br>
+            <small class="text-muted">Last reply on: October 10, 2024 at 10:20 AM</small>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

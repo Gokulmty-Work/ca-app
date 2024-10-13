@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="View Inquiry" blockClass="pc-component">
+        <div class="container mt-4">
+            <!-- Thread Content -->
+            <div class="card">
+              <div class="card-body">
+                
+                <!-- User Question Section -->
+                <div class="question-section mb-4 position-relative">
+                  <h5 class="card-title">Your Question</h5>
+                  
+                  <!-- Edit Button for User Question (Top Right Corner) -->
+                  <button *ngIf="!adminHasReplied && !isThreadClosed" class="btn btn-sm btn-secondary position-absolute" style="top: 0; right: 0;" (click)="editQuestion = true">Edit</button>
+                  
+                  <div [ngClass]="{'bg-light': adminHasReplied, 'bg-info text-white': !adminHasReplied}" class="p-3">
+                    <ng-container *ngIf="!editQuestion">
+                      <p>{{ userQuestion }}</p>
+          
+                      <!-- Attached Files Displayed as Links -->
+                      <div *ngIf="attachedFiles.length > 0" class="mt-2">
+                        <strong>Attached Files:</strong>
+                        <ul>
+                          <li *ngFor="let file of attachedFiles">
+                            <a href="#">{{ file }}</a>
+                            <a href="#" class="text-danger ml-2" (click)="removeFile(file)">Remove</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-container>
+          
+                    <ng-container *ngIf="editQuestion">
+                      <textarea class="form-control mb-2" [(ngModel)]="userQuestion"></textarea>
+                      <button class="btn btn-primary btn-sm" (click)="saveQuestion()">Save</button>
+                      <button class="btn btn-danger btn-sm ml-2" (click)="editQuestion = false">Cancel</button>
+          
+                      <!-- Attached Files with Remove Option -->
+                      <div *ngIf="attachedFiles.length > 0" class="mt-2">
+                        <strong>Attached Files:</strong>
+                        <ul>
+                          <li *ngFor="let file of attachedFiles">
+                            <a href="#">{{ file }}</a>
+                            <a href="#" class="text-danger ml-2" (click)="removeFile(file)">Remove</a>
+                          </li>
+                        </ul>
+                      </div>
+          
+                      <!-- File Input for Adding New Files -->
+                      <div class="mt-2">
+                        <input type="file" (change)="handleFileInput($event)" multiple>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+          
+                <!-- Admin Reply Section -->
+                <div class="reply-section mb-4" *ngIf="adminHasReplied">
+                  <h5 class="card-title">Admin Reply</h5>
+                  <div class="bg-success text-white p-3 position-relative">
+                    <ng-container *ngIf="!editAdminReply">
+                      <p>{{ adminReply }}</p>
+                      <!-- Edit Button for Admin Reply -->
+                      <button *ngIf="isAdmin" class="btn btn-sm btn-secondary position-absolute" style="top: 0; right: 0;" (click)="editAdminReply = true">Edit</button>
+                    </ng-container>
+          
+                    <ng-container *ngIf="editAdminReply">
+                      <textarea class="form-control mb-2" [(ngModel)]="adminReply"></textarea>
+                      <button class="btn btn-primary btn-sm" (click)="saveAdminReply()">Save</button>
+                      <button class="btn btn-danger btn-sm ml-2" (click)="editAdminReply = false">Cancel</button>
+          
+                      <!-- Admin Attached Files Displayed as Links -->
+                      <div *ngIf="adminAttachedFiles.length > 0" class="mt-2">
+                        <strong>Attached Files:</strong>
+                        <ul>
+                          <li *ngFor="let file of adminAttachedFiles">
+                            <a href="#">{{ file }}</a>
+                            <a href="#" class="text-danger ml-2" (click)="removeAdminFile(file)">Remove</a>
+                          </li>
+                        </ul>
+                      </div>
+          
+                      <!-- File Input for Admin Reply Attachments -->
+                      <div class="mt-2">
+                        <input type="file" (change)="handleAdminFileInput($event)" multiple>
+                      </div>
+                    </ng-container>
+          
+                    <!-- Admin Attached Files Displayed as Links -->
+                    <div *ngIf="adminAttachedFiles.length > 0" class="mt-2">
+                      <strong>Attached Files:</strong>
+                      <ul>
+                        <li *ngFor="let file of adminAttachedFiles">
+                          <a href="#">{{ file }}</a>
+                          <a href="#" class="text-danger ml-2" (click)="removeAdminFile(file)">Remove</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Follow-up Section -->
+                <div class="followup-section" *ngIf="adminHasReplied && !isThreadClosed">
+                  <h5 class="card-title">{{ isAdmin ? 'Post a Reply' : 'Post a Follow-up Question' }}</h5>
+                  <textarea class="form-control mb-2" [(ngModel)]="followupQuestion"></textarea>
+                  <button class="btn btn-primary" (click)="isAdmin ? postAdminReply() : postFollowup()">{{ isAdmin ? 'Post Reply' : 'Post Follow-up' }}</button>
+          
+                  <!-- Follow-up Questions Display -->
+                  <div *ngIf="followupQuestions.length > 0" class="mt-2">
+                    <strong>Follow-up Questions:</strong>
+                    <ul>
+                      <li *ngFor="let followup of followupQuestions">
+                        <p>{{ followup }}</p>
+                        <a href="#" class="text-danger ml-2" (click)="removeFollowupQuestion(followup)">Remove</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Close Conversation Button -->
+                <div class="close-thread-section mt-4">
+                  <button class="btn btn-warning" (click)="closeThread()" [disabled]="isThreadClosed">
+                    Close Conversation
+                  </button>
+                </div>
+          
+                <!-- Message if Thread is Closed -->
+                <div *ngIf="isThreadClosed" class="alert alert-success mt-3">
+                  This thread is now closed. No further questions or replies can be posted.
+                </div>
+              </div>
+            </div>
+          </div>
+  </app-card>
+  </div>
+  </div>
+  
